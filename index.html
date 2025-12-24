@@ -1,139 +1,87 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="UTF-8" />
+  <title>Simulador Examen Licencia Clase B</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Simulador Examen Licencia Chile</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="container">
-    <header class="header">
-      <div class="brand">
-        <div class="logo">🚗</div>
-        <div>
-          <h1>Simulador de examen teórico</h1>
-          <p class="muted">Clase B · 35 preguntas · 35 minutos · mínimo 28 correctas</p>
-        </div>
-      </div>
-      <div class="pill" id="modePill">Modo examen</div>
-    </header>
 
-    <!-- HOME -->
-    <section class="card" id="screenHome">
+  <!-- HOME -->
+  <section id="screenHome" class="container">
+    <h1>Simulador de examen teórico</h1>
+    <p>Clase B · 35 preguntas · 35 minutos · mínimo 28 correctas</p>
+
+    <div class="card">
       <h2>¿Listo para comenzar?</h2>
-      <p class="muted">
-        Al presionar <b>Ir al Test</b> comienza el temporizador real. Puedes avanzar y retroceder sin perder respuestas.
-      </p>
+      <p>Al presionar <b>Ir al Test</b> comienza el temporizador real.</p>
 
-      <div class="grid">
-        <div class="mini">
-          <div class="miniTitle">Preguntas</div>
-          <div class="miniValue" id="homeTotal">35</div>
-        </div>
-        <div class="mini">
-          <div class="miniTitle">Tiempo</div>
-          <div class="miniValue">35:00</div>
-        </div>
-        <div class="mini">
-          <div class="miniTitle">Para aprobar</div>
-          <div class="miniValue">28</div>
-        </div>
+      <div class="stats">
+        <div><b>Preguntas</b><br><span id="homeTotal">35</span></div>
+        <div><b>Tiempo</b><br>35:00</div>
+        <div><b>Para aprobar</b><br>28</div>
       </div>
 
-      <div class="row">
-        <button class="primary" id="btnStart">Ir al Test</button>
-        <button class="ghost" id="btnPractice">Modo práctica (sin tiempo)</button>
-        <button class="ghost" id="btnReset">Borrar progreso</button>
+      <button id="btnStart">Ir al Test</button>
+      <button id="btnPractice">Modo práctica (sin tiempo)</button>
+      <button id="btnReset">Borrar progreso</button>
+    </div>
+  </section>
+
+  <!-- EXAMEN -->
+  <section id="screenExam" class="container hidden">
+    <div class="topbar">
+      <span id="modePill">Modo examen</span>
+      <span id="progressText"></span>
+    </div>
+
+    <div class="timers">
+      <div>
+        <b>Tiempo real</b>
+        <div id="realTimer">--:--</div>
+        <small id="realHint"></small>
       </div>
-
-      <p class="tiny muted">
-        Consejo: si abres este archivo con doble clic y no carga preguntas, usa “Live Server” en VS Code o súbelo a un hosting (GitHub Pages / Netlify).
-      </p>
-    </section>
-
-    <!-- EXAM -->
-    <section class="card hidden" id="screenExam">
-      <div class="topbar">
-        <div class="timers">
-          <div class="timer">
-            <div class="label">Tiempo real</div>
-            <div class="value" id="realTimer">35:00</div>
-            <div class="tiny muted" id="realHint">Cuenta regresiva</div>
-          </div>
-          <div class="timer">
-            <div class="label">Tiempo aproximado</div>
-            <div class="value" id="approxTimer">--:--</div>
-            <div class="tiny muted" id="approxHint">Se calcula con tu ritmo</div>
-          </div>
-        </div>
-
-        <div class="progress">
-          <div class="tiny muted" id="progressText">Pregunta 1 de 35</div>
-          <div class="bar"><div id="barFill"></div></div>
-        </div>
+      <div>
+        <b>Tiempo estimado</b>
+        <div id="approxTimer">--:--</div>
+        <small id="approxHint"></small>
       </div>
+    </div>
 
-      <hr />
+    <div class="question">
+      <div id="qCategory"></div>
+      <div id="qId"></div>
+      <h3 id="qText"></h3>
+      <div id="answers"></div>
+    </div>
 
-      <div class="qmeta">
-        <span class="badge" id="qCategory">Categoría</span>
-        <span class="tiny muted" id="qId"></span>
-      </div>
+    <div class="nav">
+      <button id="btnPrev">Anterior</button>
+      <button id="btnNext">Siguiente</button>
+      <button id="btnFinish">Finalizar</button>
+    </div>
 
-      <h2 class="question" id="qText">Cargando…</h2>
+    <div id="autosaveInfo" class="tiny"></div>
+  </section>
 
-      <div class="answers" id="answers"></div>
+  <!-- RESULTADOS -->
+  <section id="screenResults" class="container hidden">
+    <h2>Resultados</h2>
 
-      <div class="row">
-        <button class="ghost" id="btnPrev">Anterior</button>
-        <button class="primary" id="btnNext">Siguiente</button>
-        <button class="danger" id="btnFinish">Finalizar</button>
-      </div>
+    <p id="rPassFail"></p>
+    <ul>
+      <li>Correctas: <b id="rCorrect"></b></li>
+      <li>Incorrectas: <b id="rWrong"></b></li>
+      <li>Sin responder: <b id="rBlank"></b></li>
+      <li>Tiempo usado: <b id="rTime"></b></li>
+    </ul>
 
-      <p class="tiny muted" id="autosaveInfo"></p>
-    </section>
+    <button id="btnHome">Volver al inicio</button>
+    <button id="btnRestart">Reiniciar</button>
 
-    <!-- RESULTS -->
-    <section class="card hidden" id="screenResults">
-      <h2>Resultado</h2>
-
-      <div class="resultsGrid">
-        <div class="mini">
-          <div class="miniTitle">Correctas</div>
-          <div class="miniValue" id="rCorrect">0</div>
-        </div>
-        <div class="mini">
-          <div class="miniTitle">Incorrectas</div>
-          <div class="miniValue" id="rWrong">0</div>
-        </div>
-        <div class="mini">
-          <div class="miniTitle">Sin responder</div>
-          <div class="miniValue" id="rBlank">0</div>
-        </div>
-        <div class="mini">
-          <div class="miniTitle">Tiempo usado</div>
-          <div class="miniValue" id="rTime">00:00</div>
-        </div>
-      </div>
-
-      <div class="passfail" id="rPassFail">—</div>
-
-      <details class="cardInner">
-        <summary>Revisión pregunta por pregunta</summary>
-        <div id="review"></div>
-      </details>
-
-      <div class="row">
-        <button class="primary" id="btnHome">Volver al inicio</button>
-        <button class="ghost" id="btnRestart">Reiniciar intento</button>
-      </div>
-    </section>
-
-    <footer class="footer tiny muted">
-      Hecho para estudiar. Edita <b>data/questions.json</b> para agregar tus preguntas.
-    </footer>
-  </div>
+    <div id="review"></div>
+  </section>
 
   <script src="app.js"></script>
 </body>
