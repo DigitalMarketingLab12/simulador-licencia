@@ -1,0 +1,151 @@
+:root{
+  --bg:#0b1220;
+  --card:#0f1b33;
+  --text:#eaf0ff;
+  --muted:#a8b3cf;
+  --line:#233455;
+  --primary:#2f6bff;
+  --danger:#ff3b5c;
+  --ghost:#203053;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  background: radial-gradient(1200px 800px at 20% 0%, #142852, var(--bg));
+  color:var(--text);
+}
+.container{max-width:980px;margin:28px auto;padding:0 16px}
+.header{display:flex;gap:12px;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap}
+.brand{display:flex;gap:12px;align-items:center}
+.logo{width:42px;height:42px;display:grid;place-items:center;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.10);border-radius:14px;font-size:20px}
+h1{margin:0;font-size:22px}
+h2{margin:0 0 10px}
+.muted{color:var(--muted)}
+.tiny{font-size:12px}
+.hidden{display:none}
+
+.pill{
+  padding:8px 10px;
+  border-radius:999px;
+  background:rgba(47,107,255,0.15);
+  border:1px solid rgba(47,107,255,0.35);
+  font-size:12px;
+  white-space:nowrap;
+}
+
+.card{
+  background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:16px;
+  padding:16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.35);
+}
+
+.grid{
+  display:grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  gap:10px;
+  margin:12px 0;
+}
+@media (max-width:720px){ .grid{grid-template-columns:1fr} }
+
+.mini{
+  background: rgba(0,0,0,0.18);
+  border:1px solid rgba(255,255,255,0.10);
+  border-radius:14px;
+  padding:10px 12px;
+}
+.miniTitle{font-size:12px;color:var(--muted)}
+.miniValue{font-size:22px;font-weight:800;margin-top:4px}
+
+.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+button{
+  padding:10px 14px;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,0.12);
+  background: var(--ghost);
+  color:var(--text);
+  cursor:pointer;
+}
+button.primary{background: var(--primary); border-color: rgba(255,255,255,0.18)}
+button.danger{background: var(--danger)}
+button.ghost{background: rgba(0,0,0,0.18)}
+button:disabled{opacity:.55;cursor:not-allowed}
+
+.topbar{display:flex;gap:12px;justify-content:space-between;flex-wrap:wrap}
+.timers{display:flex;gap:10px;flex-wrap:wrap}
+.timer{
+  min-width:190px;
+  background: rgba(0,0,0,0.18);
+  border:1px solid rgba(255,255,255,0.10);
+  padding:10px 12px;
+  border-radius:14px;
+}
+.timer .label{font-size:12px;color:var(--muted)}
+.timer .value{font-size:22px;font-weight:800;margin-top:3px}
+
+.progress{min-width:240px;flex:1}
+.bar{
+  height:10px;border-radius:999px;background: rgba(0,0,0,0.22);
+  border:1px solid rgba(255,255,255,0.08);
+  overflow:hidden;
+}
+#barFill{height:100%;width:0%}
+
+hr{border:none;border-top:1px solid rgba(255,255,255,0.10);margin:12px 0}
+
+.qmeta{display:flex;gap:10px;align-items:center;margin-bottom:6px}
+.badge{
+  font-size:12px;padding:4px 8px;border-radius:999px;
+  background: rgba(47,107,255,0.18);
+  border:1px solid rgba(47,107,255,0.35);
+}
+
+.question{font-size:20px;line-height:1.25;margin:10px 0 12px}
+
+.answers{display:grid;gap:10px}
+.answer{
+  padding:10px 12px;border-radius:14px;
+  border:1px solid rgba(255,255,255,0.12);
+  background: rgba(0,0,0,0.18);
+}
+.answer label{display:flex;gap:10px;cursor:pointer;align-items:flex-start}
+.answer input{margin-top:3px}
+
+.resultsGrid{
+  display:grid;
+  grid-template-columns: repeat(4, minmax(0,1fr));
+  gap:10px;
+  margin:12px 0;
+}
+@media (max-width:900px){ .resultsGrid{grid-template-columns: repeat(2, minmax(0,1fr))} }
+
+.passfail{
+  margin:10px 0 0;
+  font-size:18px;
+  font-weight:900;
+  padding:10px 12px;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,0.12);
+  background: rgba(0,0,0,0.18);
+}
+
+.cardInner{
+  margin-top:12px;
+  padding:12px;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,0.10);
+  background: rgba(0,0,0,0.14);
+}
+.reviewItem{
+  margin-top:10px;
+  padding:10px;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,0.10);
+  background: rgba(0,0,0,0.12);
+}
+.reviewItem .rtitle{font-weight:900}
+
+.footer{margin-top:14px;opacity:.9}
